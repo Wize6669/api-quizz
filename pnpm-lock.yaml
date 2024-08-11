@@ -45,6 +45,12 @@ importers:
       '@prisma/client':
         specifier: ^5.18.0
         version: 5.18.0(prisma@5.18.0)
+      '@types/convict':
+        specifier: ^6.1.6
+        version: 6.1.6
+      '@types/convict-format-with-validator':
+        specifier: ^6.0.5
+        version: 6.0.5
       '@types/express':
         specifier: ^4.17.21
         version: 4.17.21
@@ -608,6 +614,12 @@ packages:
 
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
+
+  '@types/convict-format-with-validator@6.0.5':
+    resolution: {integrity: sha512-C2a0tbzs2V99BmCOZMgMbu1T5Oi31Ui1Yp8zVU4VH4BB8DwiJkREoEjENBvJyrCJpBrRYK1h+YRv8mCWnuWedQ==}
+
+  '@types/convict@6.1.6':
+    resolution: {integrity: sha512-1B6jqWHWQud+7yyWAqbxnPmzlHrrOtJzZr1DhhYJ/NbpS4irfZSnq+N5Fm76J9LNRlUZvCmYxTVhhohWRvtqHw==}
 
   '@types/express-serve-static-core@4.19.5':
     resolution: {integrity: sha512-y6W03tvrACO72aijJ5uF02FRq5cgDR9lUxddQ8vyF+GvmjJQqbzDcJngEjURc+ZsG31VI3hODNZJ2URj86pzmg==}
@@ -2257,6 +2269,14 @@ snapshots:
       '@types/node': 22.2.0
 
   '@types/connect@3.4.38':
+    dependencies:
+      '@types/node': 22.2.0
+
+  '@types/convict-format-with-validator@6.0.5':
+    dependencies:
+      '@types/convict': 6.1.6
+
+  '@types/convict@6.1.6':
     dependencies:
       '@types/node': 22.2.0
 
