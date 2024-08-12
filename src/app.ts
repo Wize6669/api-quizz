@@ -20,7 +20,6 @@ app.use(
 );
 
 // Routes
-
 app.use('/', homeHealthRouter);
 
 export { app };
