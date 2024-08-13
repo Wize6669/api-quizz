@@ -1,0 +1,8 @@
+model Simulator {
+    id        Int        @id @default(autoincrement())
+    name      String
+    password  String
+    duration  Int // no estoy seguro de si va o no, no se si esto se lo pone en la logica del cogido
+    navigate  String // no estoy seguro de si va o no, no se si esto se lo pone en la logica del cogido
+    questions Question[]
+}
