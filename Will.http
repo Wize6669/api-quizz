@@ -1,0 +1,13 @@
+### POST Auth - sign-up
+POST http://localhost:3001/api/v1/auth/sign-up
+Content-Type: application/json
+
+{
+    "name": "Juan",
+    "lastName": "Pérez",
+    "email": "juan.perez@example.com",
+    "password": "supersecurepassword",
+    "roleId": 1
+}
+
+###

@@ -42,6 +42,11 @@
           </node>
         </introspection-scope>
       </choose-schema-mapping>
+      <use-database negative="1" kind="database" qname="postgres" operator="@">
+        <node kind="schema">
+          <name qname="public" />
+        </node>
+      </use-database>
       <url>jdbc:postgresql://localhost:5432/prisma</url>
       <remarks />
       <vm-options />

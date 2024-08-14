@@ -5,6 +5,7 @@ import { config } from './config';
 
 // Routes
 import { router as homeHealthRouter } from './routes/homeHealth.route';
+import { router as authRouter } from "./routes/auth.route";
 
 const app = express();
 const HOST_FRONT_END = config.get('HOST_FRONT_END');
@@ -21,5 +22,6 @@ app.use(
 
 // Routes
 app.use('/', homeHealthRouter);
+app.use('/api/v1/auth', authRouter);
 
 export { app };
