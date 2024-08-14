@@ -1,34 +1,88 @@
 import { PrismaClient } from '@prisma/client';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import bcrypt from 'bcryptjs';
+import { User, UserAuth } from '../model/user';
+import { ErrorMessage } from '../model/errorMessage';
 
 const prisma = new PrismaClient();
 
-const signUpService = async (name: string, lastName: string, email:string, password: string, roleId: number) => {
+const signUpService = async (user: User): Promise<UserAuth | ErrorMessage> => {
   try {
-    const userExist = await prisma.user.findFirst({
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        email: user.email,
+      }
+    });
+
+    if(existingUser) {
+      return { error: 'User already exists', code: 409 };
+    }
+
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+
+    const newUser = await prisma.user.create({
+      data: {
+        name: user.name,
+        last_name: user.lastName,
+        email: user.email,
+        password: hashedPassword,
+        roleId: user.roleId,
+      }
+    });
+
+    const userAuth: UserAuth = {
+      name: newUser.name,
+      lastName: newUser.last_name,
+      email: newUser.email,
+      roleId: newUser.roleId,
+    };
+
+    return userAuth;
+  } catch (error) {
+    if (error instanceof PrismaClientKnownRequestError) {
+    const fieldName = error.meta?.field_name;
+
+    return { error: `Prisma\n Field name: ${fieldName} - Message: ${error.message}`, code: 400 };
+    }
+
+    return {error: 'Error occurred with the server', code: 500};
+  }
+}
+
+const signInService = async (email:string, password: string): Promise<UserAuth | ErrorMessage> => {
+  try {
+    const user = await prisma.user.findFirst({
       where: {
         email: email,
       }
     });
 
-    if(userExist) {
-      return {error: "User already exists"};
+    if(!user) {
+      return {error: 'Invalid credentials', code: 400};
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const isCorrectPassword = await bcrypt.compare(password, user.password);
 
-    return await prisma.user.create({
-      data: {
-        name: name,
-        last_name: lastName,
-        email: email,
-        password: hashedPassword,
-        roleId: roleId,
-      }
-    });
-  } catch (e) {
-    return {error: "Error occurred with the server"};
+    if(!isCorrectPassword) {
+      return {error: 'Invalid credentials', code: 400};
+    }
+
+    const userAuth: UserAuth = {
+      name: user.name,
+      lastName: user.last_name,
+      email: user.email,
+      roleId: user.roleId,
+    };
+
+    return userAuth;
+  } catch (error) {
+    if (error instanceof PrismaClientKnownRequestError) {
+
+      return {error: `Prisma: ${error.meta} - ${error.message}`, code: 400}
+    }
+    
+    return {error: 'Error occurred with the server', code: 500};
   }
 }
 
-export { signUpService };
+export { signUpService, signInService };
