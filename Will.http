@@ -18,7 +18,19 @@ Content-Type: application/json
 
 {
     "email": "juan.perez@example.com",
-    "password": "supersecurepassword"
+    "password": "supersecurepassword1"
+}
+
+###
+
+### PUT Admin - change-password-user
+PUT http://localhost:3001/api/v1/admin/change-password-user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMGY4NzdmLTFiOTEtNDFlNC1iMDFjLWQyMjk5Y2Y5MGY0OSIsIm5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJQw6lyZXoiLCJlbWFpbCI6Imp1YW4ucGVyZXpAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6ZmFsc2UsInJvbGVJZCI6MSwiaWF0IjoxNzIzNzQwMjcyLCJleHAiOjE3MjM3NTI4NzJ9.BacCCZZVxwxOHwsB9_14rZlHohhjajBsW1jFAnPFZJ4
+
+{
+  "email": "juan.perez@example.com",
+  "newPassword": "supersecurepassword1"
 }
 
 ###

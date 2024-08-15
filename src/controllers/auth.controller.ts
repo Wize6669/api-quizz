@@ -22,7 +22,7 @@ const signInController = async (req: Request, res: Response) => {
 
   const token = generateAccessToken(result)
 
-  res.status(201).json({...result, token});
+  res.status(200).json({...result, token});
 }
 
 export { signUpController, signInController }

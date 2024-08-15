@@ -10,8 +10,8 @@ const signUpService = async (user: User): Promise<UserAuth | ErrorMessage> => {
   try {
     const existingUser = await prisma.user.findFirst({
       where: {
-        email: user.email,
-      }
+        email: user.email
+      },
     });
 
     if(existingUser) {
@@ -31,6 +31,7 @@ const signUpService = async (user: User): Promise<UserAuth | ErrorMessage> => {
     });
 
     const userAuth: UserAuth = {
+      id: user.id,
       name: newUser.name,
       lastName: newUser.last_name,
       email: newUser.email,
@@ -54,6 +55,7 @@ const signInService = async (email:string, password: string): Promise<UserAuth |
     const user = await prisma.user.findFirst({
       where: {
         email: email,
+        delete: null,
       }
     });
 
@@ -68,9 +70,11 @@ const signInService = async (email:string, password: string): Promise<UserAuth |
     }
 
     const userAuth: UserAuth = {
+      id: user.id,
       name: user.name,
       lastName: user.last_name,
       email: user.email,
+      changePassword: user.change_password,
       roleId: user.roleId,
     };
 

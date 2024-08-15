@@ -4,9 +4,14 @@ import morgan from 'morgan';
 import { config } from './config';
 import helmet from 'helmet';
 
+// Middlewares
+import { authorizationVerifierMiddleware } from './middlewares/authorizationVerifier.middleware';
+
+
 // Routes
 import { router as homeHealthRouter } from './routes/homeHealth.route';
 import { router as authRouter } from "./routes/auth.route";
+import { router as adminRouter } from "./routes/admin.route";
 
 const app = express();
 const HOST_FRONT_END = config.get('HOST_FRONT_END');
@@ -25,5 +30,6 @@ app.use(
 // Routes
 app.use('/', homeHealthRouter);
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/admin', authorizationVerifierMiddleware, adminRouter);
 
 export { app };
