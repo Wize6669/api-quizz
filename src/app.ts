@@ -6,6 +6,8 @@ import helmet from 'helmet';
 
 // Middlewares
 import { authorizationVerifierMiddleware } from './middlewares/authorizationVerifier.middleware';
+import { schemaVerifierMiddleware } from './middlewares/schemaVerifier.middleware';
+import { headerAuthorizationSchemaJWT } from './schemasJoi/headerAuthorization.schema';
 
 
 // Routes
