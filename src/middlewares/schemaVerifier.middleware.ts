@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import Joi from "joi";
+import Joi, { ValidationError } from "joi";
 
 enum RequestValues {
   Body = "body",
@@ -44,8 +44,15 @@ const schemaVerifierMiddleware = (schemas: SchemasConfig) => {
       }
       next();
     } catch (error) {
-      if (error instanceof Error) {
-        res.status(400).json({ message: error.message });
+      if (error instanceof ValidationError) {
+        const errors = error.details.map(({ message, path }) => ({
+          message,
+          path: path.join('.')
+        }));
+        if (errors.length > 1) {
+          return res.status(400).json({errors: errors})
+        }
+        return res.status(400).json({error: errors[0]})
       } else {
         next(error);
       }

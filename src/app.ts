@@ -4,16 +4,15 @@ import morgan from 'morgan';
 import { config } from './config';
 import helmet from 'helmet';
 
-// Middlewares
+// Global Middlewares
 import { authorizationVerifierMiddleware } from './middlewares/authorizationVerifier.middleware';
-import { schemaVerifierMiddleware } from './middlewares/schemaVerifier.middleware';
-import { headerAuthorizationSchemaJWT } from './schemasJoi/headerAuthorization.schema';
-
+import { jwtVerifierMiddleware } from './middlewares/jwtVerifier.middleware';
 
 // Routes
 import { router as homeHealthRouter } from './routes/homeHealth.route';
-import { router as authRouter } from "./routes/auth.route";
-import { router as adminRouter } from "./routes/admin.route";
+import { router as authRouter } from './routes/auth.route';
+import { router as adminRouter } from './routes/admin.route';
+import { router as userRouter } from './routes/user.route';
 
 const app = express();
 const HOST_FRONT_END = config.get('HOST_FRONT_END');
@@ -33,5 +32,6 @@ app.use(
 app.use('/', homeHealthRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/admin', authorizationVerifierMiddleware, adminRouter);
+app.use('/api/v1/users', jwtVerifierMiddleware, userRouter);
 
 export { app };
