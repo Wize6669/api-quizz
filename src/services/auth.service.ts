@@ -1,8 +1,8 @@
-import { PrismaClient } from '@prisma/client';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import {PrismaClient} from '@prisma/client';
+import {PrismaClientKnownRequestError} from '@prisma/client/runtime/library';
 import bcrypt from 'bcryptjs';
-import { User, UserAuth } from '../model/user';
-import { ErrorMessage } from '../model/errorMessage';
+import {User, UserAuth} from '../model/user';
+import {ErrorMessage} from '../model/errorMessage';
 
 const prisma = new PrismaClient();
 
@@ -30,15 +30,13 @@ const signUpService = async (user: User): Promise<UserAuth | ErrorMessage> => {
       }
     });
 
-    const userAuth: UserAuth = {
+    return {
       id: user.id,
       name: newUser.name,
       lastName: newUser.last_name,
       email: newUser.email,
       roleId: newUser.roleId,
     };
-
-    return userAuth;
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
     const fieldName = error.meta?.field_name;
@@ -69,7 +67,7 @@ const signInService = async (email:string, password: string): Promise<UserAuth |
       return {error: 'Invalid credentials', code: 400};
     }
 
-    const userAuth: UserAuth = {
+    return {
       id: user.id,
       name: user.name,
       lastName: user.last_name,
@@ -77,14 +75,12 @@ const signInService = async (email:string, password: string): Promise<UserAuth |
       changePassword: user.change_password,
       roleId: user.roleId,
     };
-
-    return userAuth;
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
 
       return {error: `Prisma: ${error.meta} - ${error.message}`, code: 400}
     }
-    
+
     return {error: 'Error occurred with the server', code: 500};
   }
 }

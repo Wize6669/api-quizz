@@ -6,12 +6,13 @@ import {ErrorMessage} from '../model/errorMessage';
 
 const prisma = new PrismaClient();
 
-const resetPasswordService = async (email:string, newPassword: string): Promise<UserChangePassword | ErrorMessage> => {
+const changePasswordService = async (email:string, newPassword: string): Promise<UserChangePassword | ErrorMessage> => {
     try {
       const existingUser = await prisma.user.findFirst({
         where: {
           email: email,
-          delete: null
+          delete: null,
+          change_password:true
         },
       });
 
@@ -27,7 +28,7 @@ const resetPasswordService = async (email:string, newPassword: string): Promise<
         },
         data: {
           password: hashedPassword,
-          change_password:true
+          change_password:false
         }
       });
 
@@ -45,4 +46,4 @@ const resetPasswordService = async (email:string, newPassword: string): Promise<
     }
   }
 
-  export { resetPasswordService }
+  export { changePasswordService }
