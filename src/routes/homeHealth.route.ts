@@ -10,4 +10,4 @@ router.get('/health', (_, res: Response) => {
   res.status(200).send('Healthy');
 });
 
-export { router }
+export { router };

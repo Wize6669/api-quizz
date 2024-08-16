@@ -9,4 +9,4 @@ interface PaginationResponse<T> {
     data: T[];
 }
 
-export { PaginationResponse }
+export { PaginationResponse };

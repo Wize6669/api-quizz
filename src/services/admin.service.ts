@@ -2,7 +2,7 @@ import {PrismaClient} from '@prisma/client';
 import {PrismaClientKnownRequestError} from '@prisma/client/runtime/library';
 import bcrypt from 'bcryptjs';
 import {UserChangePassword} from '../model/user';
-import {ErrorMessage} from '../model/errorMessage';
+import {ErrorMessage} from '../model/messages';
 
 const prisma = new PrismaClient();
 
@@ -45,4 +45,4 @@ const resetPasswordService = async (email:string, newPassword: string): Promise<
     }
   }
 
-  export { resetPasswordService }
+  export { resetPasswordService };

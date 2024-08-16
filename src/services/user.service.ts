@@ -1,9 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import bcrypt from 'bcryptjs';
-import { UserChangePassword, UserPagination } from '../model/user';
+import { UserChangePassword, UserPagination, UserAuth, UpdateUser } from '../model/user';
 import { PaginationResponse } from '../model/pagination';
-import { ErrorMessage } from '../model/errorMessage';
+import { ErrorMessage, InfoMessage } from '../model/messages';
 import { calculatePagination } from '../utils/pagination.util';
 
 const prisma = new PrismaClient();
@@ -19,6 +19,7 @@ const changePasswordService = async (email:string, newPassword: string): Promise
       });
 
       if(!existingUser) {
+
         return { error: 'User not found', code: 404 };
       }
 
@@ -103,4 +104,115 @@ const changePasswordService = async (email:string, newPassword: string): Promise
     }
   }
 
-  export { changePasswordService, userListService }
+  const updateUserService = async (updateUser: UpdateUser): Promise<UserAuth | ErrorMessage> => {
+    try {
+      console.log(updateUser.id)
+      const existingUser = await prisma.user.findFirst({
+        where: {
+          id: updateUser.id,
+        },
+      });
+
+      if(!existingUser) {
+
+        return { error: 'User not found', code: 404 };
+      }
+
+      const user = await prisma.user.update({
+        where: {
+          id: updateUser.id,
+        },
+        data: {
+          name: updateUser.name,
+          last_name: updateUser.lastName,
+          email: updateUser.email,
+          roleId: updateUser.roleId
+        }
+      });
+
+    return {
+        id: user.id,
+        name: user.name,
+        lastName: user.last_name,
+        email: user.email,
+        roleId: user.roleId,
+      };
+    } catch (error) {
+      if (error instanceof PrismaClientKnownRequestError) {
+      const fieldName = error.meta?.field_name;
+
+      return { error: `Prisma\n Field name: ${fieldName} - Message: ${error.message}`, code: 400 };
+      }
+
+      console.log(error)
+      return {error: 'Error occurred with the server', code: 500};
+    }
+  }
+
+  const deleteUserService = async (id: string): Promise<InfoMessage | ErrorMessage> => {
+    try {
+      const existingUser = await prisma.user.findFirst({
+        where: {
+          id: id,
+        },
+      });
+
+      if(!existingUser) {
+
+        return { error: 'User not found', code: 404 };
+      }
+
+      await prisma.user.delete({
+        where: {
+          id: id
+        }
+      });
+
+      return {code: 204};
+
+    } catch (error) {
+      if (error instanceof PrismaClientKnownRequestError) {
+      const fieldName = error.meta?.field_name;
+
+      return { error: `Prisma\n Field name: ${fieldName} - Message: ${error.message}`, code: 400 };
+      }
+
+      console.log(error)
+      return {error: 'Error occurred with the server', code: 500};
+    }
+  }
+
+  const getUserByIdService = async (id:string): Promise<UserPagination | ErrorMessage> => {
+    try {
+      const existingUser = await prisma.user.findFirst({
+        where: {
+          id: id
+        },
+      });
+
+      if(!existingUser) {
+
+        return { error: 'User not found', code: 404 };
+      }
+
+      return {
+        name: existingUser.name,
+        lastName: existingUser.last_name,
+        email: existingUser.email,
+        delete: existingUser.delete,
+        changePassword: existingUser.change_password,
+        role: existingUser.roleId,
+      };
+
+    } catch (error) {
+      if (error instanceof PrismaClientKnownRequestError) {
+      const fieldName = error.meta?.field_name;
+
+      return { error: `Prisma\n Field name: ${fieldName} - Message: ${error.message}`, code: 400 };
+      }
+
+      return {error: 'Error occurred with the server xd', code: 500};
+    }
+  }
+
+  export { changePasswordService, userListService, updateUserService, deleteUserService, getUserByIdService };

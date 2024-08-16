@@ -3,9 +3,9 @@ POST http://localhost:3001/api/v1/auth/sign-up
 Content-Type: application/json
 
 {
-    "name": "Juan",
+    "name": "Juan2",
     "lastName": "Pérez",
-    "email": "juan.perez@example.com",
+    "email": "juan.perez9@example.com",
     "password": "supersecurepassword",
     "roleId": 1
 }
@@ -17,7 +17,7 @@ POST http://localhost:3001/api/v1/auth/sign-in
 Content-Type: application/json
 
 {
-    "email": "juan.perez@example.com",
+    "email": "juan.perez2@example.com",
     "password": "supersecurepassword"
 }
 
@@ -35,9 +35,36 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzZTE2MzRjL
 
 ###
 
-### GET Admin - users
+### GET Users - usersList
 GET http://localhost:3001/api/v1/users?page=1&count=5
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE2NzM2ZjJjLTliZjEtNDI4Zi1iNzZlLWVlN2M5MDZiZjZjZCIsIm5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJQw6lyZXoiLCJlbWFpbCI6Imp1YW4ucGVyZXpAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6dHJ1ZSwicm9sZUlkIjoxLCJpYXQiOjE3MjM4MjI3OTgsImV4cCI6MTcyMzgzNTM5OH0.5fbihBnwUIdi7aZ3IG2ossP5UP40xSzlF44X5haqtC0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljOWNjNmEyLTA4MTQtNDUyNC04ZWI1LTVhZWZjM2Q1Nzk5YiIsIm5hbWUiOiJKdWFuMiIsImxhc3ROYW1lIjoiUMOpcmV6MiIsImVtYWlsIjoianVhbi5wZXJlejJAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6dHJ1ZSwicm9sZUlkIjoxLCJpYXQiOjE3MjM4Mzg1NDAsImV4cCI6MTcyMzg1MTE0MH0.f6gdJM_u-wRS7lmig2NwpRNIIUWRn0orQtHMTmK2lzg
+
+###
+
+### GET Users - getUserById
+GET http://localhost:3001/api/v1/users/6e57ff4e-c5ce-40a5-b7e6-126bd601ba39
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljOWNjNmEyLTA4MTQtNDUyNC04ZWI1LTVhZWZjM2Q1Nzk5YiIsIm5hbWUiOiJKdWFuMiIsImxhc3ROYW1lIjoiUMOpcmV6MiIsImVtYWlsIjoianVhbi5wZXJlejJAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6dHJ1ZSwicm9sZUlkIjoxLCJpYXQiOjE3MjM4Mzg1NDAsImV4cCI6MTcyMzg1MTE0MH0.f6gdJM_u-wRS7lmig2NwpRNIIUWRn0orQtHMTmK2lzg
+
+###
+
+### POST Users - updateUser
+POST http://localhost:3001/api/v1/users/update/9c9cc6a2-0814-4524-8eb5-5aefc3d5799b
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljOWNjNmEyLTA4MTQtNDUyNC04ZWI1LTVhZWZjM2Q1Nzk5YiIsIm5hbWUiOiJKdWFuMiIsImxhc3ROYW1lIjoiUMOpcmV6MiIsImVtYWlsIjoianVhbi5wZXJlejJAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6dHJ1ZSwicm9sZUlkIjoxLCJpYXQiOjE3MjM4Mzg1NDAsImV4cCI6MTcyMzg1MTE0MH0.f6gdJM_u-wRS7lmig2NwpRNIIUWRn0orQtHMTmK2lzg
+
+{
+    "name": "JuanA",
+    "lastName": "PérezA",
+    "email": "juan.perezAzX@example.com",
+    "roleId": 2
+}
+###
+
+### DELETE Users - deleteUser
+DELETE http://localhost:3001/api/v1/users/delete/9c9cc6a2-0814-4524-8eb5-5aefc3d5799b
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljOWNjNmEyLTA4MTQtNDUyNC04ZWI1LTVhZWZjM2Q1Nzk5YiIsIm5hbWUiOiJKdWFuMiIsImxhc3ROYW1lIjoiUMOpcmV6MiIsImVtYWlsIjoianVhbi5wZXJlejJAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6dHJ1ZSwicm9sZUlkIjoxLCJpYXQiOjE3MjM4Mzg1NDAsImV4cCI6MTcyMzg1MTE0MH0.f6gdJM_u-wRS7lmig2NwpRNIIUWRn0orQtHMTmK2lzg
 
 ###

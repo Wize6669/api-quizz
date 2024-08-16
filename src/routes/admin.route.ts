@@ -7,4 +7,4 @@ const router = Router();
 
 router.put('/change-password-user', schemaVerifierMiddleware({headers: headerAuthorizationSchemaJWT}),resetPasswordController);
 
-export { router }
+export { router };

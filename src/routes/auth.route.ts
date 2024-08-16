@@ -9,4 +9,4 @@ router.post('/sign-in', signInController);
 
 router.post('/sign-up', schemaVerifierMiddleware({body: userSchemaSingUp}), signUpController);
 
-export { router }
+export { router };
