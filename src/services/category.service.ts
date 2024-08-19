@@ -92,8 +92,10 @@ const deleteCategoryService = async (categoryId: number): Promise<InfoMessage | 
         id: categoryId,
       },
     });
+
     console.log(`Category with ID: ${categoryId} deleted successfully`);
     return {code: 204};
+
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
       const fieldName = error.meta?.field_name;

@@ -8,13 +8,14 @@ import {
 } from "../controllers/category.controller";
 import {paginationSchema} from "../schemasJoi/pagination.schema";
 import {schemaVerifierMiddleware} from "../middlewares/schemaVerifier.middleware";
+import {categorySchemaCreateUpdate, categorySchemaParams} from "../schemasJoi/category.schema";
 
 const router = Router();
 
-router.post('/create-category', createCategoryController);
+router.post('/create-category', [schemaVerifierMiddleware({body: categorySchemaCreateUpdate})],createCategoryController);
 router.get('/', [schemaVerifierMiddleware({query: paginationSchema})], listCategoryController);
-router.get('/:id', getCategoryByIdController);
-router.post('/update-category/:id', updateCategoryController);
-router.delete('/delete-category/:id', deleteCategoryController);
+router.get('/:id', [schemaVerifierMiddleware({params: categorySchemaParams})],getCategoryByIdController);
+router.post('/update-category/:id', [schemaVerifierMiddleware({params: categorySchemaParams}), schemaVerifierMiddleware({body: categorySchemaCreateUpdate})],updateCategoryController);
+router.delete('/delete-category/:id',  [schemaVerifierMiddleware({params: categorySchemaParams})],deleteCategoryController);
 
 export { router };

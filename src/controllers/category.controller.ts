@@ -22,10 +22,6 @@ const updateCategoryController = async (req: Request, res: Response) => {
   const {name} = req.body;
   const numericId = parseInt(id, 10);
 
-  if (isNaN(numericId)) {
-    return res.status(400).json({error: 'Invalid ID format'});
-  }
-
   const result = await updateCategoryService({id: numericId, name})
   if ('error' in result) {
     return res.status(result.code).json({message: result.error});
@@ -37,9 +33,6 @@ const deleteCategoryController = async (req: Request, res: Response) => {
   const {id} = req.params;
   const numericId = parseInt(id, 10);
 
-  if (isNaN(numericId)) {
-    return res.status(400).json({error: 'Invalid ID format'});
-  }
   const result = await deleteCategoryService(numericId);
   if ('error' in result) {
     return res.status(result.code).json({message: result.error});
@@ -62,9 +55,6 @@ const getCategoryByIdController = async (req: Request, res: Response) => {
   const {id} = req.params;
   const numericId = parseInt(id, 10);
 
-  if (isNaN(numericId)) {
-    return res.status(400).json({error: 'Invalid ID format'});
-  }
   const result = await getCategoryByIdService(numericId);
   if ('error' in result) {
     return res.status(result.code).json({message: result.error});
