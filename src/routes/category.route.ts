@@ -11,7 +11,7 @@ import {schemaVerifierMiddleware} from "../middlewares/schemaVerifier.middleware
 
 const router = Router();
 
-router.post("/create-category", createCategoryController);
+router.post('/create-category', createCategoryController);
 router.get('/', [schemaVerifierMiddleware({query: paginationSchema})], listCategoryController);
 router.get('/:id', getCategoryByIdController);
 router.post('/update-category/:id', updateCategoryController);

@@ -14,8 +14,8 @@ const createCategoryService = async (category: Category): Promise<Category | Err
         name: category.name
       },
     });
-    if (!existingCategory) {
-      return {error: 'Category alredy exists', code: 409};
+    if (existingCategory) {
+      return {error: 'Category already exists', code: 409};
     }
 
     const newCategory = await prisma.category.create({
@@ -86,11 +86,13 @@ const deleteCategoryService = async (categoryId: number): Promise<InfoMessage | 
       return {error: 'Category not found', code: 404};
     }
 
+    console.log(`Category found. Deleting category with ID: ${categoryId}`);
     await prisma.category.delete({
       where: {
         id: categoryId,
       },
     });
+    console.log(`Category with ID: ${categoryId} deleted successfully`);
     return {code: 204};
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
@@ -152,7 +154,7 @@ const getCategoryByIdService = async (categoryId: number): Promise<Category | Er
     });
 
     if(!existingCategory) {
-      return { error: 'User not found', code: 404 };
+      return { error: 'Category not found', code: 404 };
     }
 
     return {
