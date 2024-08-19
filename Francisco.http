@@ -29,5 +29,5 @@ Content-Type: application/json
 
 ###
 ### Eliminar una categoria
-DELETE http://localhost:3001/api/v1/category/delete-category/9
+DELETE http://localhost:3001/api/v1/category/delete-category/19
 Content-Type: application/json

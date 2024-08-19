@@ -34,10 +34,11 @@ const deleteCategoryController = async (req: Request, res: Response) => {
   const numericId = parseInt(id, 10);
 
   const result = await deleteCategoryService(numericId);
+
   if ('error' in result) {
     return res.status(result.code).json({message: result.error});
   }
-  res.status(result.code);
+  res.status(result.code).json(result);
 }
 
 const listCategoryController = async (req: Request, res: Response) => {
