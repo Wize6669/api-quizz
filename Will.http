@@ -5,7 +5,7 @@ Content-Type: application/json
 {
     "name": "Juan2",
     "lastName": "Pérez",
-    "email": "juan.perez9@example.com",
+    "email": "juan.perez@example.com",
     "password": "supersecurepassword",
     "roleId": 1
 }
@@ -17,7 +17,7 @@ POST http://localhost:3001/api/v1/auth/sign-in
 Content-Type: application/json
 
 {
-    "email": "juan.perez2@example.com",
+    "email": "juan.perez@example.com",
     "password": "supersecurepassword"
 }
 
