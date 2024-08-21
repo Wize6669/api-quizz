@@ -1,5 +1,5 @@
 import {PrismaClient} from "@prisma/client";
-import {Simulator, SimulatorCreate, SimulatorList} from "../model/simulator";
+import {Simulator, SimulatorCreate} from "../model/simulator";
 import {ErrorMessage, InfoMessage} from "../model/messages";
 import bcrypt from "bcryptjs";
 import {PrismaClientKnownRequestError} from "@prisma/client/runtime/library";
@@ -15,7 +15,7 @@ const createSimulatorService = async (simulator: Simulator): Promise<SimulatorCr
                 name: simulator.name
             },
         });
-        if (!existingSimulator) {
+        if (existingSimulator) {
             return {error: 'Simulator already exists', code: 409};
         }
 
@@ -51,7 +51,7 @@ const createSimulatorService = async (simulator: Simulator): Promise<SimulatorCr
     }
 }
 
-const updateSimulatorService = async (updateSimulator: Simulator): Promise<Simulator | ErrorMessage> => {
+const updateSimulatorService = async (updateSimulator: Simulator): Promise<SimulatorCreate | ErrorMessage> => {
     try {
         const existingSimulator = await prisma.simulator.findFirst({
             where: {
@@ -63,26 +63,29 @@ const updateSimulatorService = async (updateSimulator: Simulator): Promise<Simul
             return {error: 'Simulator not found', code: 404};
         }
 
-        const hashedPassword = await bcrypt.hash(updateSimulator.password, 10);
+      const hashedPassword = updateSimulator.password
+        ? await bcrypt.hash(updateSimulator.password, 10)
+        : existingSimulator.password;
 
         const simulator = await prisma.simulator.update({
             where: {
                 id: updateSimulator.id,
             },
             data: {
-                name: updateSimulator.name,
-                password: hashedPassword,
-                duration: updateSimulator.duration,
-                navigate: updateSimulator.navigate,
+              name: updateSimulator.name,
+              password: hashedPassword,
+              duration: updateSimulator.duration,
+              navigate: updateSimulator.navigate,
             }
         });
 
         return {
-            id: simulator.id,
-            name: simulator.name,
-            password: simulator.password,
-            duration: simulator.duration,
-            navigate: simulator.navigate,
+          id: simulator.id,
+          name: simulator.name,
+          duration: simulator.duration,
+          navigate: simulator.navigate,
+          number_of_questions: simulator.number_of_questions,
+          number_of_sections: simulator.number_of_sections,
         };
     } catch (error) {
         if (error instanceof PrismaClientKnownRequestError) {
@@ -107,12 +110,14 @@ const deleteSimulatorService = async (simulatorId: string): Promise<InfoMessage 
         if (!existingSimulator) {
             return {error: 'Simulator not found', code: 404};
         }
-
+        console.log(`Category found. Deleting category with ID: ${simulatorId}`);
         await prisma.simulator.delete({
             where: {
                 id: simulatorId,
             }
         });
+
+        console.log(`Category with ID: ${simulatorId} deleted successfully`);
         return {code: 204};
     } catch (error) {
         if (error instanceof PrismaClientKnownRequestError) {
@@ -126,7 +131,7 @@ const deleteSimulatorService = async (simulatorId: string): Promise<InfoMessage 
     }
 }
 
-const simulatorListService = async (page: number = 1, count: number = 5): Promise<PaginationResponse<SimulatorList> | ErrorMessage> => {
+const simulatorListService = async (page: number = 1, count: number = 5): Promise<PaginationResponse<SimulatorCreate> | ErrorMessage> => {
 
     try {
         const total = await prisma.simulator.count();
@@ -136,11 +141,12 @@ const simulatorListService = async (page: number = 1, count: number = 5): Promis
             skip: (page - 1) * count,
             take: count,
             select: {
-                id: true,
-                name: true,
-                password: true,
-                duration: true,
-                navigate: false,
+              id: true,
+              name: true,
+              duration: true,
+              navigate: true,
+              number_of_questions: true,
+              number_of_sections: true,
             },
             orderBy: [
                 {name: 'asc'}
@@ -148,13 +154,15 @@ const simulatorListService = async (page: number = 1, count: number = 5): Promis
         });
 
         const data = simulatorList.map(simulator => ({
-            id: simulator.id,
-            name: simulator.name,
-            password: simulator.password,
-            duration: simulator.duration,
+          id: simulator.id,
+          name: simulator.name,
+          duration: simulator.duration,
+          navigate: simulator.navigate,
+          number_of_questions: simulator.number_of_questions,
+          number_of_sections: simulator.number_of_sections,
         }));
 
-        const result: PaginationResponse<SimulatorList> = {
+        const result: PaginationResponse<SimulatorCreate> = {
             ...paginationInfo,
             data,
         };
@@ -171,7 +179,7 @@ const simulatorListService = async (page: number = 1, count: number = 5): Promis
     }
 }
 
-const getSimulatorByIdService = async (simulatorId: string): Promise<Simulator | ErrorMessage> => {
+const getSimulatorByIdService = async (simulatorId: string): Promise<SimulatorCreate | ErrorMessage> => {
     try {
         const existingSimulator = await prisma.simulator.findFirst({
             where: {
@@ -185,9 +193,10 @@ const getSimulatorByIdService = async (simulatorId: string): Promise<Simulator |
 
         return {
             name: existingSimulator.name,
-            password: existingSimulator.password,
             duration: existingSimulator.duration,
             navigate: existingSimulator.navigate,
+            number_of_questions: existingSimulator.number_of_questions,
+            number_of_sections: existingSimulator.number_of_sections,
         };
     } catch (error) {
         if (error instanceof PrismaClientKnownRequestError) {

@@ -15,7 +15,7 @@ const userListController = async (req: Request, res: Response) => {
 }
 
 const updateUserController = async (req: Request, res: Response) => {
-  const { id } = req.params; 
+  const { id } = req.params;
   const { name, lastName, email, roleId } = req.body;
   const result = await updateUserService({ id, name, lastName, email, roleId })
 
@@ -27,7 +27,7 @@ const updateUserController = async (req: Request, res: Response) => {
 }
 
 const deleteUserController = async (req: Request, res: Response) => {
-  const { id } = req.params; 
+  const { id } = req.params;
   const result = await deleteUserService(id);
 
   if ('error' in result) {
@@ -38,7 +38,7 @@ const deleteUserController = async (req: Request, res: Response) => {
 }
 
 const getUserByIdController = async (req: Request, res: Response) => {
-  const { id } = req.params; 
+  const { id } = req.params;
   const result = await getUserByIdService(id);
 
   if ('error' in result) {
