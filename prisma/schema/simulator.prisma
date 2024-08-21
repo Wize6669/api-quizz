@@ -1,9 +1,11 @@
 model Simulator {
-    id               String     @id @default(uuid())
-    name             String     @unique
-    password         String
-    duration         Int
-    navigate         Boolean
-    number_questions Int
-    questions        Question[]
+    id                  String     @id @default(uuid())
+    name                String
+    password            String
+    duration            Int
+    navigate            Boolean
+    sections            Section[] // Relación con las secciones
+    Question            Question[]
+    number_of_questions Int        @default(0)
+    number_of_sections  Int        @default(0)
 }
