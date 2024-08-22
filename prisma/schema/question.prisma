@@ -4,7 +4,6 @@ model Question {
     imageUrl      String?
     justification String?
     answer        Int
-    answerId      String
     options       Option[]
     categoryId    Int?
     simulatorId   String?
