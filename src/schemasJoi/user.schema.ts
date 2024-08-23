@@ -15,8 +15,13 @@ const userSchemaUpdateBody = Joi.object({
   roleId: Joi.number().required(),
 });
 
+const userSchemaChangePasswordBody = Joi.object({
+  temporaryPassword: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
+  newPassword: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
+});
+
 const userSchemaParams = Joi.object({
   id: Joi.string().min(3).required(),
 });
 
-export { userSchemaSingUp, userSchemaUpdateBody, userSchemaParams };
+export { userSchemaSingUp, userSchemaUpdateBody, userSchemaParams, userSchemaChangePasswordBody };

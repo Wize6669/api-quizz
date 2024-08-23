@@ -1,11 +1,11 @@
-import { Request, Response, NextFunction } from 'express';
+import {NextFunction, Request, Response} from 'express';
 import jwt from "jsonwebtoken";
-import { config } from '../config';
-import { UserMiddleware } from '../model/user';
+import {config} from '../config';
+import {UserMiddleware} from '../model/user';
 
 declare module 'express' {
   interface Request {
-    user?: UserMiddleware; 
+    user?: UserMiddleware;
   }
 }
 
@@ -31,9 +31,7 @@ const jwtVerifierMiddleware = (req: Request, res: Response, next: NextFunction) 
     }
 
     if (typeof decodedToken === 'object' && decodedToken !== null) {
-      const user = decodedToken as UserMiddleware;
-
-      req.user = user;
+      req.user = decodedToken as UserMiddleware;
     }
 
     next();

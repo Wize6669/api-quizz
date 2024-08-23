@@ -1,18 +1,18 @@
-import { PrismaClient } from '@prisma/client';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import {PrismaClient} from '@prisma/client';
+import {PrismaClientKnownRequestError} from '@prisma/client/runtime/library';
 import bcrypt from 'bcryptjs';
-import { UserChangePassword, UserPagination, UserAuth, UpdateUser } from '../model/user';
-import { PaginationResponse } from '../model/pagination';
-import { ErrorMessage, InfoMessage } from '../model/messages';
-import { calculatePagination } from '../utils/pagination.util';
+import {UpdateUser, UserAuth, UserChangePassword, UserPagination} from '../model/user';
+import {PaginationResponse} from '../model/pagination';
+import {ErrorMessage, InfoMessage} from '../model/messages';
+import {calculatePagination} from '../utils/pagination.util';
 
 const prisma = new PrismaClient();
 
-const changePasswordService = async (email:string, newPassword: string): Promise<UserChangePassword | ErrorMessage> => {
+const changePasswordService = async (id:string, temporaryPassword: string, newPassword: string): Promise<UserChangePassword | ErrorMessage> => {
     try {
       const existingUser = await prisma.user.findFirst({
         where: {
-          email: email,
+          id: id,
           delete: null,
           change_password:true
         },
@@ -23,11 +23,18 @@ const changePasswordService = async (email:string, newPassword: string): Promise
         return { error: 'User not found', code: 404 };
       }
 
+      const isCorrectPassword = await bcrypt.compare(temporaryPassword, existingUser.password);
+
+      if(!isCorrectPassword) {
+
+        return {error: 'Invalid credentials', code: 400};
+      }
+
       const hashedPassword = await bcrypt.hash(newPassword, 10);
 
       const user = await prisma.user.update({
         where: {
-          email: email
+          id: id,
         },
         data: {
           password: hashedPassword,
@@ -76,7 +83,7 @@ const changePasswordService = async (email:string, newPassword: string): Promise
           { last_name: 'asc' },
         ],
       });
-      
+
       const data = userList.map(user => ({
         id: user.id,
         name: user.name,
@@ -87,12 +94,10 @@ const changePasswordService = async (email:string, newPassword: string): Promise
         role: user.role.title,
     }));
 
-    const result: PaginationResponse<UserPagination> = {
-        ...paginationInfo,
-        data,
+    return {
+      ...paginationInfo,
+      data,
     };
-
-    return result;
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
       const fieldName = error.meta?.field_name;
@@ -106,7 +111,6 @@ const changePasswordService = async (email:string, newPassword: string): Promise
 
   const updateUserService = async (updateUser: UpdateUser): Promise<UserAuth | ErrorMessage> => {
     try {
-      console.log(updateUser.id)
       const existingUser = await prisma.user.findFirst({
         where: {
           id: updateUser.id,
@@ -169,7 +173,6 @@ const changePasswordService = async (email:string, newPassword: string): Promise
       });
 
       return {code: 204};
-
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
       const fieldName = error.meta?.field_name;
@@ -177,7 +180,6 @@ const changePasswordService = async (email:string, newPassword: string): Promise
       return { error: `Prisma\n Field name: ${fieldName} - Message: ${error.message}`, code: 400 };
       }
 
-      console.log(error)
       return {error: 'Error occurred with the server', code: 500};
     }
   }
@@ -203,7 +205,6 @@ const changePasswordService = async (email:string, newPassword: string): Promise
         changePassword: existingUser.change_password,
         role: existingUser.roleId,
       };
-
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
       const fieldName = error.meta?.field_name;
