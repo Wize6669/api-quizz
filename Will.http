@@ -5,7 +5,7 @@ Content-Type: application/json
 {
     "name": "Juan2",
     "lastName": "Pérez",
-    "email": "juan.perez9@example.com",
+    "email": "juan.perez@example.com",
     "password": "supersecurepassword",
     "roleId": 1
 }
@@ -17,14 +17,14 @@ POST http://localhost:3001/api/v1/auth/sign-in
 Content-Type: application/json
 
 {
-    "email": "juan.perez2@example.com",
+    "email": "juan.perez@example.com",
     "password": "supersecurepassword"
 }
 
 ###
 
-### PUT Admin - change-password-user
-PUT http://localhost:3001/api/v1/admin/change-password-user
+### PUT Admin - reset-password
+PUT http://localhost:3001/api/v1/admin/reset-password
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzZTE2MzRjLWYwYTktNGFiZS1hZTdkLTcyZjkzOTQ2NjMyOSIsIm5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJQw6lyZXoiLCJlbWFpbCI6Imp1YW4ucGVyZXpAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6dHJ1ZSwicm9sZUlkIjoxLCJpYXQiOjE3MjM4MTcwMDUsImV4cCI6MTcyMzgyOTYwNX0.LqvAoa30WwbZLW-BkAnfoqFsbuu88ViQiEuN2qvQoHk
 
@@ -59,6 +59,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljOWNjNmEyL
     "lastName": "PérezA",
     "email": "juan.perezAzX@example.com",
     "roleId": 2
+}
+###
+
+### PATCH Users - change-password
+PATCH http://localhost:3001/api/v1/users/change-password/76cea5b8-30e6-4207-bf26-34bf18df2da7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc2Y2VhNWI4LTMwZTYtNDIwNy1iZjI2LTM0YmYxOGRmMmRhNyIsIm5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJQw6lyZXoiLCJlbWFpbCI6Imp1YW4ucGVyZXoyQGV4YW1wbGUuY29tIiwiY2hhbmdlUGFzc3dvcmQiOnRydWUsInJvbGVJZCI6MSwiaWF0IjoxNzI0Mzc4MDc0LCJleHAiOjE3MjQzOTA2NzR9.CC4_V7LTQIqgMK0VJKvsZhKZ59Ht5Wn4e-EWShXPwt0
+
+{
+    "temporaryPassword": "supersecurepassword",
+    "newPassword": "supersecurepassword2ss"
 }
 ###
 
