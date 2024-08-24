@@ -26,7 +26,7 @@ app.use(morgan('dev'));
 app.use(
   cors({
     origin: HOST_FRONT_END,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   })
 );
 

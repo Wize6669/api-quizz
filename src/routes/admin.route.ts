@@ -5,6 +5,7 @@ import { headerAuthorizationSchemaJWT } from '../schemasJoi/headerAuthorization.
 
 const router = Router();
 
-router.put('/change-password-user', schemaVerifierMiddleware({headers: headerAuthorizationSchemaJWT}),resetPasswordController);
+router.put('/reset-password', schemaVerifierMiddleware({ headers: headerAuthorizationSchemaJWT }), resetPasswordController);
 
 export { router };
+
