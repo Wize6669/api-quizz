@@ -4,8 +4,6 @@ model Simulator {
     password            String
     duration            Int
     navigate            Boolean
-    sections            Section[] // Relación con las secciones
     Question            Question[]
     number_of_questions Int        @default(0)
-    number_of_sections  Int        @default(0)
 }

@@ -28,7 +28,6 @@ const createSimulatorService = async (simulator: Simulator): Promise<SimulatorCr
                 duration: simulator.duration,
                 navigate: simulator.navigate,
                 number_of_questions: 0,
-                number_of_sections: 0,
             }
         });
 
@@ -38,7 +37,6 @@ const createSimulatorService = async (simulator: Simulator): Promise<SimulatorCr
             duration: newSimulator.duration,
             navigate: newSimulator.navigate,
             number_of_questions: newSimulator.number_of_questions,
-            number_of_sections: newSimulator.number_of_sections,
         };
     } catch (error) {
         if (error instanceof PrismaClientKnownRequestError) {
@@ -85,7 +83,6 @@ const updateSimulatorService = async (updateSimulator: Simulator): Promise<Simul
           duration: simulator.duration,
           navigate: simulator.navigate,
           number_of_questions: simulator.number_of_questions,
-          number_of_sections: simulator.number_of_sections,
         };
     } catch (error) {
         if (error instanceof PrismaClientKnownRequestError) {
@@ -146,7 +143,6 @@ const simulatorListService = async (page: number = 1, count: number = 5): Promis
               duration: true,
               navigate: true,
               number_of_questions: true,
-              number_of_sections: true,
             },
             orderBy: [
                 {name: 'asc'}
@@ -159,7 +155,6 @@ const simulatorListService = async (page: number = 1, count: number = 5): Promis
           duration: simulator.duration,
           navigate: simulator.navigate,
           number_of_questions: simulator.number_of_questions,
-          number_of_sections: simulator.number_of_sections,
         }));
 
         const result: PaginationResponse<SimulatorCreate> = {
@@ -196,7 +191,6 @@ const getSimulatorByIdService = async (simulatorId: string): Promise<SimulatorCr
             duration: existingSimulator.duration,
             navigate: existingSimulator.navigate,
             number_of_questions: existingSimulator.number_of_questions,
-            number_of_sections: existingSimulator.number_of_sections,
         };
     } catch (error) {
         if (error instanceof PrismaClientKnownRequestError) {

@@ -9,7 +9,7 @@ const createQuestionService = async (question: Question, file?: Express.Multer.F
   try{
     const existingQuestion = await prisma.question.findFirst({
       where: {
-        text: question.text,
+        id: question.id,
       },
     });
     if (existingQuestion) {

@@ -2,6 +2,4 @@ model Category {
     id        Int        @id @default(autoincrement())
     name      String
     questions Question[]
-    section   Section?   @relation(fields: [sectionId], references: [id])
-    sectionId String?
 }

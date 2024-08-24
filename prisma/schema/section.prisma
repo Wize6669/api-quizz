@@ -1,6 +1,0 @@
-model Section {
-    id          String     @id @default(uuid())
-    categories  Category[]
-    simulator   Simulator  @relation(fields: [simulatorId], references: [id])
-    simulatorId String
-}
