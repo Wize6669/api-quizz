@@ -18,7 +18,7 @@ Content-Type: application/json
 
 {
     "email": "juan.perez@example.com",
-    "password": "supersecurepassword"
+    "password": "supersecurepassword1"
 }
 
 ###
@@ -26,10 +26,10 @@ Content-Type: application/json
 ### PUT Admin - reset-password
 PUT http://localhost:3001/api/v1/admin/reset-password
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzZTE2MzRjLWYwYTktNGFiZS1hZTdkLTcyZjkzOTQ2NjMyOSIsIm5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJQw6lyZXoiLCJlbWFpbCI6Imp1YW4ucGVyZXpAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6dHJ1ZSwicm9sZUlkIjoxLCJpYXQiOjE3MjM4MTcwMDUsImV4cCI6MTcyMzgyOTYwNX0.LqvAoa30WwbZLW-BkAnfoqFsbuu88ViQiEuN2qvQoHk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyMDk1OWRiLWM0ZmUtNDgyZS04M2JmLWVhNGZjZTA4YzIxNSIsIm5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJQw6lyZXoiLCJlbWFpbCI6Imp1YW4ucGVyZXpAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6ZmFsc2UsInJvbGVJZCI6MSwiaWF0IjoxNzI1MTQyNTgwLCJleHAiOjE3MjUxNTUxODB9.SSnZUVybjgdxvk7vtJUmNsmgXzV3YjOxBRBFTNBbqQo
 
 {
-  "email": "juan.perez@example.com",
+  "email": "juan.perez2@example.com",
   "newPassword": "supersecurepassword1"
 }
 

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { resetPasswordController } from "../controllers/admin.controller";
+import { resetPasswordController } from '../controllers/admin.controller';
 import { schemaVerifierMiddleware } from '../middlewares/schemaVerifier.middleware';
 import { headerAuthorizationSchemaJWT } from '../schemasJoi/headerAuthorization.schema';
 
