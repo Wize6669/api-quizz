@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 const questionSchema = Joi.object({
-  text: Joi.string()
+  statement: Joi.string()
     .min(1)
     .max(255)
     .required()
@@ -13,7 +13,7 @@ const questionSchema = Joi.object({
       'any.required': 'El texto de la pregunta es obligatorio.',
     }),
 
-  imageUrl: Joi.string()
+    imageName: Joi.string()
     .uri()
     .allow(null)
     .optional()

@@ -15,7 +15,7 @@ Content-Type: application/json
 ###
 
 ###Actualizar una categoria
-POST http://localhost:3001/api/v1/category/update-category/9
+POST http://localhost:3001/api/v1/category/update-category/1
 Content-Type: application/json
 
 {
@@ -24,10 +24,10 @@ Content-Type: application/json
 
 ###
 ### Obtener una categoria por ID
-GET http://localhost:3001/api/v1/category/9
+GET http://localhost:3001/api/v1/category/1
 Content-Type: application/json
 
 ###
 ### Eliminar una categoria
-DELETE http://localhost:3001/api/v1/category/delete-category/19
+DELETE http://localhost:3001/api/v1/category/delete-category/2
 Content-Type: application/json

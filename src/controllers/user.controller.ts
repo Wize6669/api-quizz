@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { userListService, updateUserService, deleteUserService, getUserByIdService } from '../services/user.service';
+import { userListService, updateUserService, deleteUserService, getUserByIdService, changePasswordService } from '../services/user.service';
 
 const userListController = async (req: Request, res: Response) => {
   const { page, count } = req.query;
@@ -48,4 +48,16 @@ const getUserByIdController = async (req: Request, res: Response) => {
   res.status(200).json(result);
 }
 
-export { userListController, updateUserController, deleteUserController, getUserByIdController }
+const changePasswordController = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { temporaryPassword, newPassword } = req.body;
+  const result = await changePasswordService(id, temporaryPassword, newPassword);
+
+  if ('error' in result) {
+    return res.status(result.code).json({message: result.error});
+  }
+
+  res.status(200).json(result);
+}
+
+export { userListController, updateUserController, deleteUserController, getUserByIdController, changePasswordController }

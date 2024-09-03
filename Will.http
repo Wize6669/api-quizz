@@ -18,7 +18,7 @@ Content-Type: application/json
 
 {
     "email": "juan.perez@example.com",
-    "password": "supersecurepassword1"
+    "password": "supersecurepassword"
 }
 
 ###
@@ -26,11 +26,11 @@ Content-Type: application/json
 ### PUT Admin - reset-password
 PUT http://localhost:3001/api/v1/admin/reset-password
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyMDk1OWRiLWM0ZmUtNDgyZS04M2JmLWVhNGZjZTA4YzIxNSIsIm5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJQw6lyZXoiLCJlbWFpbCI6Imp1YW4ucGVyZXpAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6ZmFsc2UsInJvbGVJZCI6MSwiaWF0IjoxNzI1MTQyNTgwLCJleHAiOjE3MjUxNTUxODB9.SSnZUVybjgdxvk7vtJUmNsmgXzV3YjOxBRBFTNBbqQo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE2NzM2ZjJjLTliZjEtNDI4Zi1iNzZlLWVlN2M5MDZiZjZjZCIsIm5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJQw6lyZXoiLCJlbWFpbCI6Imp1YW4ucGVyZXpAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6ZmFsc2UsInJvbGVJZCI6MSwiaWF0IjoxNzI1Mzk0Mjg4LCJleHAiOjE3MjU0MDY4ODh9.KnDHE8a_Vgoy-dNt0pZm5X-b9QnNtFychlPmm975bsw
 
 {
-  "email": "juan.perez2@example.com",
-  "newPassword": "supersecurepassword1"
+  "email": "juan.perez@example.com",
+  "newPassword": "supersecurepassword"
 }
 
 ###
@@ -63,13 +63,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljOWNjNmEyL
 ###
 
 ### PATCH Users - change-password
-PATCH http://localhost:3001/api/v1/users/change-password/76cea5b8-30e6-4207-bf26-34bf18df2da7
+PATCH http://localhost:3001/api/v1/users/change-password/16736f2c-9bf1-428f-b76e-ee7c906bf6cd
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc2Y2VhNWI4LTMwZTYtNDIwNy1iZjI2LTM0YmYxOGRmMmRhNyIsIm5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJQw6lyZXoiLCJlbWFpbCI6Imp1YW4ucGVyZXoyQGV4YW1wbGUuY29tIiwiY2hhbmdlUGFzc3dvcmQiOnRydWUsInJvbGVJZCI6MSwiaWF0IjoxNzI0Mzc4MDc0LCJleHAiOjE3MjQzOTA2NzR9.CC4_V7LTQIqgMK0VJKvsZhKZ59Ht5Wn4e-EWShXPwt0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE2NzM2ZjJjLTliZjEtNDI4Zi1iNzZlLWVlN2M5MDZiZjZjZCIsIm5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJQw6lyZXoiLCJlbWFpbCI6Imp1YW4ucGVyZXpAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6ZmFsc2UsInJvbGVJZCI6MSwiaWF0IjoxNzI1Mzk0Mjg4LCJleHAiOjE3MjU0MDY4ODh9.KnDHE8a_Vgoy-dNt0pZm5X-b9QnNtFychlPmm975bsw
 
 {
     "temporaryPassword": "supersecurepassword",
-    "newPassword": "supersecurepassword2ss"
+    "newPassword": "supersecurepassword"
 }
 ###
 

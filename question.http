@@ -4,8 +4,8 @@ POST http://localhost:3001/api/v1/question/create-question
 Content-Type: application/json
 
 {
-    "text": "¿Cuánto es 10 + 1?",
+    "statement": "¿Cuánto es 10 + 1?",
     "answer": 3,
-    "imageUrl": "https://example.com/uploads/image.jpg",
+    "imageName": "https://example.com/uploads/image.jpg",
     "justification": "Porque si"
 }

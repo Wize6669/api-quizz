@@ -1,7 +1,7 @@
 export interface Question {
   id?: number;
-  text: string;
-  imageUrl?: string | null;
+  statement: string;
+  imageName?: string | null;
   justification?: string | null;
   answer: number;
   categoryId?: number | null;

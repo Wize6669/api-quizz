@@ -17,15 +17,15 @@ const createQuestionService = async (question: Question, file?: Express.Multer.F
     }
 
     // Procesa la imagen si está presente
-    let imageUrl: string | null = null;
+    let imageName: string | null = null;
     if (file) {
-      imageUrl = file.path; // Guardar la ruta de la imagen
+      imageName = file.path; // Guardar la ruta de la imagen
     }
 
     const newQuestion = await prisma.question.create({
       data: {
-        text: question.text,
-        imageUrl: imageUrl,
+        statement: question.statement,
+        imageName: imageName,
         justification: question.justification ?? null,
         answer: question.answer,
         categoryId: question.categoryId ?? null,
@@ -35,8 +35,8 @@ const createQuestionService = async (question: Question, file?: Express.Multer.F
 
     return {
       id: newQuestion.id,
-      text: newQuestion.text,
-      imageUrl: newQuestion.imageUrl,
+      statement: newQuestion.statement,
+      imageName: newQuestion.imageName,
       justification: newQuestion.justification,
       answer: newQuestion.answer,
       categoryId: newQuestion.categoryId,
