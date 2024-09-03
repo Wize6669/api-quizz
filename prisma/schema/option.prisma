@@ -1,6 +1,7 @@
-model Options {
+model Option {
     id         Int      @id @default(autoincrement())
-    text       String // texto de la pregunta
+    text       String
+    imageUrl   String?
     questionId Int
-    question   Question @relation(fields: [questionId], references: [id])
+    question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade) // Se elimina si la pregunta es eliminada
 }
