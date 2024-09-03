@@ -1,0 +1,39 @@
+###
+### POST simulator
+POST http://localhost:3001/api/v1/simulator/create-simulator
+Content-Type: application/json
+
+{
+    "name": "Simulador EPN",
+    "password": "Aajifofo8$",
+    "duration": 70,
+    "navigate": true
+}
+
+###
+### Obtener todos los simuladores
+GET http://localhost:3001/api/v1/simulator?page=1&count=5
+Content-Type: application/json
+###
+
+###Actualizar un simulador
+POST http://localhost:3001/api/v1/simulator/update-simulator/5c09863e-0df1-466a-8a50-7289463f5f44
+Content-Type: application/json
+
+{
+    "name": "Simulador Universidad Nacional de Loja",
+    "password": "Aajifofo8$",
+    "duration": 70,
+    "navigate": true
+}
+
+
+###
+### Obtener un simulador por ID
+GET http://localhost:3001/api/v1/simulator/5c09863e-0df1-466a-8a50-7289463f5f44
+Content-Type: application/json
+
+###
+### Eliminar un simulador
+DELETE http://localhost:3001/api/v1/simulator/delete-simulator/5c09863e-0df1-466a-8a50-7289463f5f44
+Content-Type: application/json
