@@ -3,9 +3,9 @@ POST http://localhost:3001/api/v1/auth/sign-up
 Content-Type: application/json
 
 {
-    "name": "Juan2",
-    "lastName": "Pérez",
-    "email": "juan.perez@example.com",
+    "name": "Juan3",
+    "lastName": "Pérez3",
+    "email": "juan.perez6@example.com",
     "password": "supersecurepassword",
     "roleId": 1
 }
@@ -38,7 +38,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyMDk1OWRiL
 ### GET Users - usersList
 GET http://localhost:3001/api/v1/users?page=1&count=5
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljOWNjNmEyLTA4MTQtNDUyNC04ZWI1LTVhZWZjM2Q1Nzk5YiIsIm5hbWUiOiJKdWFuMiIsImxhc3ROYW1lIjoiUMOpcmV6MiIsImVtYWlsIjoianVhbi5wZXJlejJAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6dHJ1ZSwicm9sZUlkIjoxLCJpYXQiOjE3MjM4Mzg1NDAsImV4cCI6MTcyMzg1MTE0MH0.f6gdJM_u-wRS7lmig2NwpRNIIUWRn0orQtHMTmK2lzg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyMDk1OWRiLWM0ZmUtNDgyZS04M2JmLWVhNGZjZTA4YzIxNSIsIm5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJQw6lyZXoiLCJlbWFpbCI6Imp1YW4ucGVyZXpAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6ZmFsc2UsInJvbGVJZCI6MSwiaWF0IjoxNzI1OTI0NTY0LCJleHAiOjE3MjU5MzcxNjR9.9bcahq1iZZtHLjscoWlCVm0HheWcOnaipxo4TWc5rgE
 
 ###
 
