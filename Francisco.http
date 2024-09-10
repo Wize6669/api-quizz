@@ -1,0 +1,33 @@
+###
+### POST category
+POST http://localhost:3001/api/v1/category/create-category
+Content-Type: application/json
+
+{
+    "name": "Verbal"
+}
+
+###
+
+### Obtener todas las categorias
+GET http://localhost:3001/api/v1/category?page=1&count=5
+Content-Type: application/json
+###
+
+###Actualizar una categoria
+POST http://localhost:3001/api/v1/category/update-category/1
+Content-Type: application/json
+
+{
+    "name": "Matematicas"
+}
+
+###
+### Obtener una categoria por ID
+GET http://localhost:3001/api/v1/category/1
+Content-Type: application/json
+
+###
+### Eliminar una categoria
+DELETE http://localhost:3001/api/v1/category/delete-category/2
+Content-Type: application/json

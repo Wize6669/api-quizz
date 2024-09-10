@@ -1,14 +1,8 @@
-import {Request, Response} from 'express';
-import {
-  userListService,
-  updateUserService,
-  deleteUserService,
-  getUserByIdService,
-  changePasswordService
-} from '../services/user.service';
+import { Request, Response } from 'express';
+import { userListService, updateUserService, deleteUserService, getUserByIdService, changePasswordService } from '../services/user.service';
 
 const userListController = async (req: Request, res: Response) => {
-  const {page, count} = req.query;
+  const { page, count } = req.query;
   const pageAux = Number(page)
   const countAux = Number(count)
   const result = await userListService(pageAux, countAux)
@@ -21,21 +15,9 @@ const userListController = async (req: Request, res: Response) => {
 }
 
 const updateUserController = async (req: Request, res: Response) => {
-  const {id} = req.params;
-  const {name, lastName, email, roleId} = req.body;
-  const result = await updateUserService({id, name, lastName, email, roleId})
-
-  if ('error' in result) {
-    return res.status(result.code).json({message: result.error});
-  }
-
-  res.status(200).json(result);
-}
-
-const changePasswordController = async (req: Request, res: Response) => {
-  const {id} = req.params;
-  const {temporaryPassword, newPassword} = req.body;
-  const result = await changePasswordService(id, temporaryPassword, newPassword);
+  const { id } = req.params;
+  const { name, lastName, email, roleId } = req.body;
+  const result = await updateUserService({ id, name, lastName, email, roleId })
 
   if ('error' in result) {
     return res.status(result.code).json({message: result.error});
@@ -45,7 +27,7 @@ const changePasswordController = async (req: Request, res: Response) => {
 }
 
 const deleteUserController = async (req: Request, res: Response) => {
-  const {id} = req.params;
+  const { id } = req.params;
   const result = await deleteUserService(id);
 
   if ('error' in result) {
@@ -56,7 +38,7 @@ const deleteUserController = async (req: Request, res: Response) => {
 }
 
 const getUserByIdController = async (req: Request, res: Response) => {
-  const {id} = req.params;
+  const { id } = req.params;
   const result = await getUserByIdService(id);
 
   if ('error' in result) {
@@ -66,10 +48,16 @@ const getUserByIdController = async (req: Request, res: Response) => {
   res.status(200).json(result);
 }
 
-export {
-  userListController,
-  updateUserController,
-  deleteUserController,
-  getUserByIdController,
-  changePasswordController
+const changePasswordController = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { temporaryPassword, newPassword } = req.body;
+  const result = await changePasswordService(id, temporaryPassword, newPassword);
+
+  if ('error' in result) {
+    return res.status(result.code).json({message: result.error});
+  }
+
+  res.status(200).json(result);
 }
+
+export { userListController, updateUserController, deleteUserController, getUserByIdController, changePasswordController }
