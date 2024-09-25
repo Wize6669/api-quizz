@@ -26,6 +26,7 @@ const createSimulatorService = async (simulator: Simulator): Promise<SimulatorCr
                 name: simulator.name,
                 password: hashedPassword,
                 duration: simulator.duration,
+                visibility: simulator.visibility,
                 navigate: simulator.navigate,
                 number_of_questions: 0,
             }
@@ -35,6 +36,7 @@ const createSimulatorService = async (simulator: Simulator): Promise<SimulatorCr
             id: newSimulator.id,
             name: newSimulator.name,
             duration: newSimulator.duration,
+            visibility: newSimulator.visibility,
             navigate: newSimulator.navigate,
             number_of_questions: newSimulator.number_of_questions,
         };
@@ -74,6 +76,7 @@ const updateSimulatorService = async (updateSimulator: Simulator): Promise<Simul
               password: hashedPassword,
               duration: updateSimulator.duration,
               navigate: updateSimulator.navigate,
+              visibility: updateSimulator.visibility,
             }
         });
 
@@ -82,6 +85,7 @@ const updateSimulatorService = async (updateSimulator: Simulator): Promise<Simul
           name: simulator.name,
           duration: simulator.duration,
           navigate: simulator.navigate,
+          visibility: simulator.visibility,
           number_of_questions: simulator.number_of_questions,
         };
     } catch (error) {
@@ -142,6 +146,7 @@ const simulatorListService = async (page: number = 1, count: number = 5): Promis
               name: true,
               duration: true,
               navigate: true,
+              visibility: true,
               number_of_questions: true,
             },
             orderBy: [
@@ -154,6 +159,7 @@ const simulatorListService = async (page: number = 1, count: number = 5): Promis
           name: simulator.name,
           duration: simulator.duration,
           navigate: simulator.navigate,
+          visibility: simulator.visibility,
           number_of_questions: simulator.number_of_questions,
         }));
 
@@ -190,6 +196,7 @@ const getSimulatorByIdService = async (simulatorId: string): Promise<SimulatorCr
             name: existingSimulator.name,
             duration: existingSimulator.duration,
             navigate: existingSimulator.navigate,
+            visibility: existingSimulator.visibility,
             number_of_questions: existingSimulator.number_of_questions,
         };
     } catch (error) {

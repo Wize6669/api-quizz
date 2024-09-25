@@ -3,6 +3,7 @@ export interface Simulator{
   name: string;
   password: string;
   duration: number;
+  visibility: boolean;
   navigate: boolean;
   number_of_questions?: number;
 }

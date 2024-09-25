@@ -7,7 +7,8 @@ Content-Type: application/json
     "name": "Simulador EPN",
     "password": "Aajifofo8$",
     "duration": 70,
-    "navigate": true
+    "navigate": true,
+    "visibility": true
 }
 
 ###
@@ -24,7 +25,8 @@ Content-Type: application/json
     "name": "Simulador Universidad Nacional de Loja",
     "password": "Aajifofo8$",
     "duration": 70,
-    "navigate": true
+    "navigate": true,
+    "visibility": false
 }
 
 
