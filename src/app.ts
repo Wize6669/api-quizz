@@ -16,6 +16,7 @@ import { router as userRouter } from './routes/user.route';
 import { router as categoryRouter } from './routes/category.route';
 import { router as simulatorRouter } from './routes/simulator.route';
 import { router as questionRouter } from './routes/question.route';
+import { router as courseRouter } from './routes/course.route';
 
 const app = express();
 const HOST_FRONT_END = config.get('HOST_FRONT_END');
@@ -39,5 +40,6 @@ app.use('/api/v1/users', jwtVerifierMiddleware, userRouter);
 app.use('/api/v1/category', categoryRouter);
 app.use('/api/v1/simulator', simulatorRouter);
 app.use('/api/v1/question', questionRouter);
+app.use('/api/v1/course', courseRouter);
 
 export {app};
