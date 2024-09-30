@@ -44,6 +44,14 @@ const simulatorSchema = Joi.object({
       'any.required': 'El campo de navegación es obligatorio.',
     }),
 
+  visibility: Joi.boolean()
+    .required()
+    .messages({
+      'boolean.base': 'El valor de visibilidad debe ser un booleano.',
+      'any.required': 'El campo de visibilidad es obligatorio.',
+    }),
+
+
   number_of_questions: Joi.number()
     .integer()
     .min(0)
@@ -75,7 +83,6 @@ const updateSimulatorSchema = Joi.object({
   duration: Joi.number().integer().min(1).optional(),
   navigate: Joi.boolean().optional(),
   number_of_questions: Joi.number().integer().min(0).optional(),
-  number_of_sections: Joi.number().integer().min(0).optional(),
 }).min(1);
 
 export { simulatorSchema, simulatorSchemaParams, updateSimulatorSchema };

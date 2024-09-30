@@ -4,6 +4,7 @@ model Simulator {
     password            String
     duration            Int
     navigate            Boolean
+    visibility          Boolean
     Question            Question[]
     number_of_questions Int        @default(0)
 }
