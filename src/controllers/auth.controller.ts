@@ -13,14 +13,15 @@ const signUpController = async (req: Request, res: Response) => {
 }
 
 const signInController = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
-  const result = await signInService(email, password)
+  const { email, password, roleId } = req.body;
+  const roleIdAux = parseInt(roleId);
+  const result = await signInService(email, password,roleIdAux);
 
   if ('error' in result) {
     return res.status(result.code).json({message: result.error});
   }
 
-  const token = generateAccessToken(result)
+  const token = generateAccessToken(result);
 
   res.status(200).json({...result, token});
 }

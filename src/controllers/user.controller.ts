@@ -34,7 +34,7 @@ const deleteUserController = async (req: Request, res: Response) => {
     return res.status(result.code).json({message: result.error});
   }
 
-  res.status(result.code);
+  return res.status(result.code).send('');
 }
 
 const getUserByIdController = async (req: Request, res: Response) => {

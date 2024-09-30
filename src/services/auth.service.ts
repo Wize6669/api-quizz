@@ -3,6 +3,7 @@ import {PrismaClientKnownRequestError} from '@prisma/client/runtime/library';
 import bcrypt from 'bcryptjs';
 import {User, UserAuth} from '../model/user';
 import {ErrorMessage} from '../model/messages';
+import {number} from "joi";
 
 const prisma = new PrismaClient();
 
@@ -48,7 +49,7 @@ const signUpService = async (user: User): Promise<UserAuth | ErrorMessage> => {
   }
 }
 
-const signInService = async (email:string, password: string): Promise<UserAuth | ErrorMessage> => {
+const signInService = async (email:string, password: string, roleId: number): Promise<UserAuth | ErrorMessage> => {
   try {
     const user = await prisma.user.findFirst({
       where: {
@@ -58,6 +59,11 @@ const signInService = async (email:string, password: string): Promise<UserAuth |
     });
 
     if(!user) {
+      return {error: 'Invalid credentials', code: 400};
+    }
+
+    if(user.roleId !== roleId) {
+
       return {error: 'Invalid credentials', code: 400};
     }
 

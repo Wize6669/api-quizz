@@ -3,9 +3,9 @@ POST http://localhost:3001/api/v1/auth/sign-up
 Content-Type: application/json
 
 {
-    "name": "Juan3",
-    "lastName": "Pérez3",
-    "email": "juan.perez6@example.com",
+    "name": "Juan",
+    "lastName": "Pérez",
+    "email": "juan.perez1@example.com",
     "password": "supersecurepassword",
     "roleId": 1
 }
@@ -17,8 +17,8 @@ POST http://localhost:3001/api/v1/auth/sign-in
 Content-Type: application/json
 
 {
-    "email": "juan.perez@example.com",
-    "password": "supersecurepassword"
+    "email": "juan.perez1@example.com",
+    "password": "|]xAy?nv"
 }
 
 ###
@@ -26,11 +26,11 @@ Content-Type: application/json
 ### PUT Admin - reset-password
 PUT http://localhost:3001/api/v1/admin/reset-password
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE2NzM2ZjJjLTliZjEtNDI4Zi1iNzZlLWVlN2M5MDZiZjZjZCIsIm5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJQw6lyZXoiLCJlbWFpbCI6Imp1YW4ucGVyZXpAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6ZmFsc2UsInJvbGVJZCI6MSwiaWF0IjoxNzI1Mzk0Mjg4LCJleHAiOjE3MjU0MDY4ODh9.KnDHE8a_Vgoy-dNt0pZm5X-b9QnNtFychlPmm975bsw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJjNjZmMTNmLWZlN2ItNGFhYy1hMTFjLTA0MzVmYjNmOTVjNiIsIm5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJQw6lyZXoiLCJlbWFpbCI6Imp1YW4ucGVyZXoyQGV4YW1wbGUuY29tIiwiY2hhbmdlUGFzc3dvcmQiOmZhbHNlLCJyb2xlSWQiOjEsImlhdCI6MTcyNjg4NTMzMSwiZXhwIjoxNzI2ODk3OTMxfQ.hkndUcI2IdMMYM1FmBZUSwQQydBMtR4AC1KuwZeqYQY
 
 {
-  "email": "juan.perez@example.com",
-  "newPassword": "supersecurepassword"
+  "email": "juan.perez1@example.com",
+  "newPassword": "%g)~Y9ck"
 }
 
 ###
@@ -43,14 +43,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyMDk1OWRiL
 ###
 
 ### GET Users - getUserById
-GET http://localhost:3001/api/v1/users/6e57ff4e-c5ce-40a5-b7e6-126bd601ba39
+GET http://localhost:3001/api/v1/users/77ad0307-8c1e-4f16-acde-c1a9ab905526
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljOWNjNmEyLTA4MTQtNDUyNC04ZWI1LTVhZWZjM2Q1Nzk5YiIsIm5hbWUiOiJKdWFuMiIsImxhc3ROYW1lIjoiUMOpcmV6MiIsImVtYWlsIjoianVhbi5wZXJlejJAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6dHJ1ZSwicm9sZUlkIjoxLCJpYXQiOjE3MjM4Mzg1NDAsImV4cCI6MTcyMzg1MTE0MH0.f6gdJM_u-wRS7lmig2NwpRNIIUWRn0orQtHMTmK2lzg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAzODMyYWJlLWU3N2QtNDU4Ny04ZjIzLThjY2MyZDM1NWVkYiIsIm5hbWUiOiJKdWFuMyIsImxhc3ROYW1lIjoiUMOpcmV6MyIsImVtYWlsIjoianVhbi5wZXJlejFAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6dHJ1ZSwicm9sZUlkIjoxLCJpYXQiOjE3MjY0NTg0MjAsImV4cCI6MTcyNjQ3MTAyMH0.g73vV9xD3Nn1n4iNq_z9UzGSLZFb_60V9x-O8_zPksE
 
 ###
 
 ### POST Users - updateUser
-POST http://localhost:3001/api/v1/users/update/9c9cc6a2-0814-4524-8eb5-5aefc3d5799b
+POST http://localhost:3001/api/v1/users/9c9cc6a2-0814-4524-8eb5-5aefc3d5799b
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljOWNjNmEyLTA4MTQtNDUyNC04ZWI1LTVhZWZjM2Q1Nzk5YiIsIm5hbWUiOiJKdWFuMiIsImxhc3ROYW1lIjoiUMOpcmV6MiIsImVtYWlsIjoianVhbi5wZXJlejJAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6dHJ1ZSwicm9sZUlkIjoxLCJpYXQiOjE3MjM4Mzg1NDAsImV4cCI6MTcyMzg1MTE0MH0.f6gdJM_u-wRS7lmig2NwpRNIIUWRn0orQtHMTmK2lzg
 
@@ -74,8 +74,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE2NzM2ZjJjL
 ###
 
 ### DELETE Users - deleteUser
-DELETE http://localhost:3001/api/v1/users/delete/9c9cc6a2-0814-4524-8eb5-5aefc3d5799b
+DELETE http://localhost:3001/api/v1/users/76cea5b8-30e6-4207-bf26-34bf18df2da7
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljOWNjNmEyLTA4MTQtNDUyNC04ZWI1LTVhZWZjM2Q1Nzk5YiIsIm5hbWUiOiJKdWFuMiIsImxhc3ROYW1lIjoiUMOpcmV6MiIsImVtYWlsIjoianVhbi5wZXJlejJAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6dHJ1ZSwicm9sZUlkIjoxLCJpYXQiOjE3MjM4Mzg1NDAsImV4cCI6MTcyMzg1MTE0MH0.f6gdJM_u-wRS7lmig2NwpRNIIUWRn0orQtHMTmK2lzg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkyMDk1OWRiLWM0ZmUtNDgyZS04M2JmLWVhNGZjZTA4YzIxNSIsIm5hbWUiOiJKdWFuIiwibGFzdE5hbWUiOiJQw6lyZXoiLCJlbWFpbCI6Imp1YW4ucGVyZXpAZXhhbXBsZS5jb20iLCJjaGFuZ2VQYXNzd29yZCI6ZmFsc2UsInJvbGVJZCI6MSwiaWF0IjoxNzI2NDMwMTM3LCJleHAiOjE3MjY0NDI3Mzd9.8H_FFlGr5--qEReA1-MBmRG8v95bn3f8q3AxCXg3XkA
 
 ###

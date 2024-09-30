@@ -38,6 +38,6 @@ app.use('/api/v1/admin', authorizationVerifierMiddleware, adminRouter);
 app.use('/api/v1/users', jwtVerifierMiddleware, userRouter);
 app.use('/api/v1/category', categoryRouter);
 app.use('/api/v1/simulator', simulatorRouter);
-app.use('/api/v1/question', questionRouter);
+app.use('/api/v1/questions', questionRouter);
 
 export {app};

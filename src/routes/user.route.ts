@@ -15,8 +15,8 @@ const router = Router();
 
 router.get('/', [schemaVerifierMiddleware({query: paginationSchema}), authorizationVerifierMiddleware], userListController);
 router.get('/:id', [schemaVerifierMiddleware({params: userSchemaParams}), authorizationVerifierMiddleware], getUserByIdController);
-router.post('/update/:id', [schemaVerifierMiddleware({params: userSchemaParams}), schemaVerifierMiddleware({body: userSchemaUpdateBody}), authorizationVerifierMiddleware], updateUserController);
-router.delete('/delete/:id', [schemaVerifierMiddleware({params: userSchemaParams}), authorizationVerifierMiddleware], deleteUserController);
+router.post('/:id', [schemaVerifierMiddleware({params: userSchemaParams}), schemaVerifierMiddleware({body: userSchemaUpdateBody}), authorizationVerifierMiddleware], updateUserController);
+router.delete('/:id', [schemaVerifierMiddleware({params: userSchemaParams}), authorizationVerifierMiddleware], deleteUserController);
 router.patch('/change-password/:id', [schemaVerifierMiddleware({params: userSchemaParams}), schemaVerifierMiddleware({body: userSchemaChangePasswordBody})], changePasswordController);
 
 export {router};

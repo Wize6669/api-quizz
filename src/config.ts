@@ -32,9 +32,33 @@ const config = convict({
     sensitive: true,
     env: 'PUBLIC_SECRET_KEY',
   },
+  BUCKET_NAME: {
+    doc: 'The name of the bucket in s3',
+    format: '*',
+    default: 'cenfi-mmxviii',
+    env: 'BUCKET_NAME',
+  },
+  BUCKET_REGION: {
+    doc: 'The region of the bucket in s3',
+    format: '*',
+    default: 'us-east-1',
+    env: 'BUCKET_REGION',
+  },
+  ACCESS_KEY: {
+    doc: 'Access key',
+    format: '*',
+    default: '',
+    sensitive: true,
+    env: 'ACCESS_KEY',
+  },
+  SECRET_ACCESS: {
+    doc: 'Secret access',
+    format: '*',
+    default: '',
+    sensitive: true,
+    env: 'SECRET_ACCESS',
+  },
 });
-
-//config.validate();
 
 config.validate({allowed: 'strict'});
 

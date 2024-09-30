@@ -1,6 +1,6 @@
 ###
 ### POST category
-POST http://localhost:3001/api/v1/category/create-category
+POST http://localhost:3001/api/v1/category
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ Content-Type: application/json
 ###
 
 ###Actualizar una categoria
-POST http://localhost:3001/api/v1/category/update-category/1
+POST http://localhost:3001/api/v1/category/1
 Content-Type: application/json
 
 {
@@ -29,5 +29,5 @@ Content-Type: application/json
 
 ###
 ### Eliminar una categoria
-DELETE http://localhost:3001/api/v1/category/delete-category/2
+DELETE http://localhost:3001/api/v1/category/2
 Content-Type: application/json

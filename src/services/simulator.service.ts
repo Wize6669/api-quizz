@@ -15,6 +15,7 @@ const createSimulatorService = async (simulator: Simulator): Promise<SimulatorCr
                 name: simulator.name
             },
         });
+
         if (existingSimulator) {
             return {error: 'Simulator already exists', code: 409};
         }

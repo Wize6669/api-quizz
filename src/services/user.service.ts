@@ -148,18 +148,20 @@ const changePasswordService = async (id:string, temporaryPassword: string, newPa
       return { error: `Prisma\n Field name: ${fieldName} - Message: ${error.message}`, code: 400 };
       }
 
-      console.log(error)
       return {error: 'Error occurred with the server', code: 500};
     }
   }
 
   const deleteUserService = async (id: string): Promise<InfoMessage | ErrorMessage> => {
-    try {
+
+  try {
       const existingUser = await prisma.user.findFirst({
         where: {
           id: id,
         },
       });
+
+      console.log(!existingUser)
 
       if(!existingUser) {
 
