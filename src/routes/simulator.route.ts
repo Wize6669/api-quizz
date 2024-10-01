@@ -12,8 +12,8 @@ const router = Router();
 
 router.get('/', [schemaVerifierMiddleware({query: paginationSchema})], simulatorListController);
 router.get('/:id', [schemaVerifierMiddleware({params: simulatorSchemaParams})],getSimulatorByIdController);
-router.post('/create-simulator', [schemaVerifierMiddleware({body: simulatorSchema})],createSimulatorController);
-router.post('/update-simulator/:id', [schemaVerifierMiddleware({params: simulatorSchemaParams}), schemaVerifierMiddleware({body: updateSimulatorSchema})], updateSimulatorController);
-router.delete('/delete-simulator/:id', [schemaVerifierMiddleware({params: simulatorSchemaParams})], deleteSimulatorController);
+router.post('/', [schemaVerifierMiddleware({body: simulatorSchema})],createSimulatorController);
+router.post('/:id', [schemaVerifierMiddleware({params: simulatorSchemaParams}), schemaVerifierMiddleware({body: updateSimulatorSchema})], updateSimulatorController);
+router.delete('/:id', [schemaVerifierMiddleware({params: simulatorSchemaParams})], deleteSimulatorController);
 
 export { router };

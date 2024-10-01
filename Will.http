@@ -3,9 +3,9 @@ POST http://localhost:3001/api/v1/auth/sign-up
 Content-Type: application/json
 
 {
-    "name": "Juan",
-    "lastName": "Pérez",
-    "email": "juan.perez1@example.com",
+    "name": "Francisco",
+    "lastName": "Rodriguex",
+    "email": "fran.rodri@example.com",
     "password": "supersecurepassword",
     "roleId": 1
 }

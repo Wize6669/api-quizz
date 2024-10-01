@@ -1,56 +1,56 @@
-import {PrismaClient} from "@prisma/client";
-import {Question} from "../model/question";
-import {ErrorMessage} from "../model/messages";
-import {PrismaClientKnownRequestError} from "@prisma/client/runtime/library";
+import { PrismaClient } from "@prisma/client";
+import { QuestionCreate } from "../model/question";
+import { ErrorMessage } from "../model/messages";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 const prisma = new PrismaClient();
 
-const createQuestionService = async (question: Question, file?: Express.Multer.File): Promise<Question | ErrorMessage> => {
-  try{
-    const existingQuestion = await prisma.question.findFirst({
-      where: {
-        id: question.id,
-      },
-    });
-    if (existingQuestion) {
-      return {error: 'Question already exists', code: 409};
-    }
-
-    // Procesa la imagen si está presente
-    let imageName: string | null = null;
-    if (file) {
-      imageName = file.path; // Guardar la ruta de la imagen
-    }
-
+const createQuestionService = async (question: QuestionCreate): Promise<QuestionCreate | ErrorMessage> => {
+  try {
     const newQuestion = await prisma.question.create({
       data: {
         statement: question.statement,
-        imageName: imageName,
-        justification: question.justification ?? null,
+        imageName: question.imageName || undefined,
+        justification: question.justification,
         answer: question.answer,
-        categoryId: question.categoryId ?? null,
-        simulatorId: question.simulatorId ?? null,
+        categoryId: question.categoryId,
+        simulatorId: question.simulatorId,
+        options: {
+          create: question.options.map(option => ({
+            statement: option.statement,
+            imageName: option.imageName
+          }))
+        }
+      },
+      include: {
+        options: true
       }
     });
+
+    // Si la pregunta está asociada a un simulador, actualizamos el número de preguntas
+    if (question.simulatorId) {
+      await prisma.simulator.update({
+        where: { id: question.simulatorId },
+        data: { number_of_questions: { increment: 1 } }
+      });
+    }
 
     return {
       id: newQuestion.id,
       statement: newQuestion.statement,
-      imageName: newQuestion.imageName,
-      justification: newQuestion.justification,
+      imageName: newQuestion.imageName || undefined,
+      justification: newQuestion.justification || undefined,
       answer: newQuestion.answer,
-      categoryId: newQuestion.categoryId,
-      simulatorId: newQuestion.simulatorId,
+      options: newQuestion.options,
+      categoryId: newQuestion.categoryId || undefined,
+      simulatorId: newQuestion.simulatorId || undefined
     };
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
-      const fieldName = error.meta?.field_name;
-
-      return {error: `Prisma\n Field name: ${fieldName} - Message: ${error.message}`, code: 400};
+      const fieldName = error.meta?.target;
+      return { error: `Prisma: Campo: ${fieldName} - Mensaje: ${error.message}`, code: 400 };
     }
-
-    return {error: 'Error occurred with the server', code: 500};
+    return { error: 'Ocurrió un error en el servidor', code: 500 };
   }
-}
-
+};
 export { createQuestionService }
